@@ -3,7 +3,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
+}
+
+.examples-container {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .call-container {
@@ -158,9 +167,21 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .examples-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 640px) {
+  .trillet-call {
+    padding: 1rem;
+  }
+
   .call-container {
-    margin: 1rem;
+    margin: 0;
     padding: 1.5rem;
   }
 
@@ -170,5 +191,111 @@
 
   .controls button {
     width: 100%;
+  }
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #c53030;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #feb2b2;
+}
+
+.transcripts-container {
+  margin: 1.5rem 0;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.transcript {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.transcript.assistant {
+  border-left: 3px solid #4299e1;
+}
+
+.transcript.user {
+  border-left: 3px solid #48bb78;
+}
+
+.transcript.interim {
+  border-left: 3px solid #ecc94b;
+  opacity: 0.8;
+}
+
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.transcript-header .role {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.transcript-header .time {
+  color: #718096;
+}
+
+.transcript .message {
+  color: #2d3748;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.tool-used {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #f7fafc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.tool-name {
+  color: #4a5568;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.tool-args {
+  color: #718096;
+  font-family: monospace;
+}
+
+.audio-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 } 

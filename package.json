@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@trillet-ai/web-sdk": "^1.2.7",
+    "@trillet-ai/web-sdk": "^1.3.3",
     "cra-template-typescript": "1.2.0",
     "eventemitter3": "^5.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "trillet-demo": "file:",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
