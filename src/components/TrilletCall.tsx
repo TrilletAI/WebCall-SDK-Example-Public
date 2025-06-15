@@ -48,7 +48,7 @@ const VoiceCall: React.FC = () => {
       setAudioStatus('');
     });
 
-    agentRef.current.on('error', (err) => {
+    agentRef.current.on('error', (err: Error) => {
       setError(err.message || 'An error occurred');
       setAudioStatus('');
     });
@@ -172,7 +172,7 @@ const ChatWidget: React.FC = () => {
       setIsConnected(false);
     });
 
-    agentRef.current.on('error', (err) => {
+    agentRef.current.on('error', (err: Error) => {
       setError(err.message || 'An error occurred');
     });
 
@@ -180,10 +180,8 @@ const ChatWidget: React.FC = () => {
       // transcriptUpdate will be called by the SDK
     });
 
-    agentRef.current.on('transcriptUpdate', () => {
-      if (agentRef.current) {
-        setTranscripts([...agentRef.current.getTranscripts()]);
-      }
+    agentRef.current.on('transcriptUpdate', (updatedTranscripts: Transcript[]) => {
+      setTranscripts([...updatedTranscripts]);
     });
 
     return () => {
