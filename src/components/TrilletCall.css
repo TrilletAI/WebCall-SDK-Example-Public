@@ -449,6 +449,88 @@
   border-radius: 2px;
 }
 
+/* Transcript Display Styles */
+.transcript-container {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--trillet-border);
+  backdrop-filter: blur(10px);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.transcript-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--trillet-text-primary);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.transcript-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.transcript-message {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--trillet-border);
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.transcript-message.assistant {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border-left: 3px solid var(--trillet-primary);
+}
+
+.transcript-message.user {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(34, 197, 94, 0.05) 100%);
+  border-left: 3px solid var(--trillet-success);
+}
+
+.transcript-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--trillet-text-secondary);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.transcript-text {
+  font-size: 0.875rem;
+  color: var(--trillet-text-primary);
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+.transcript-time {
+  font-size: 0.75rem;
+  color: var(--trillet-text-secondary);
+  opacity: 0.7;
+}
+
+/* Transcript scrollbar */
+.transcript-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.transcript-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.transcript-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
 .chat-messages::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }

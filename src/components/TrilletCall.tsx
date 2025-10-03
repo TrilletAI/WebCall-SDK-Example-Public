@@ -23,6 +23,7 @@ const VoiceCall: React.FC = () => {
   const [isAssistantSpeaking, setIsAssistantSpeaking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [audioStatus, setAudioStatus] = useState<string>('');
+  const [transcripts, setTranscripts] = useState<Transcript[]>([]);
   const agentRef = useRef<TrilletAgent | null>(null);
 
   useEffect(() => {
@@ -59,6 +60,23 @@ const VoiceCall: React.FC = () => {
 
     agentRef.current.on('assistantStoppedSpeaking', () => {
       setIsAssistantSpeaking(false);
+    });
+
+    agentRef.current.on('message', (message: { text: string }) => {
+      console.log('Agent First Message:', message.text);
+    });
+
+    agentRef.current.on('transcriptUpdate', (updatedTranscripts: Transcript[]) => {
+      console.log('Transcript Update:', updatedTranscripts);
+      setTranscripts([...updatedTranscripts]);
+    });
+
+    agentRef.current.on('assistantStartedSpeaking', () => {
+      console.log('🎙️ Agent started speaking');
+    });
+
+    agentRef.current.on('assistantStoppedSpeaking', () => {
+      console.log('🎙️ Agent stopped speaking');
     });
 
     return () => {
@@ -131,6 +149,26 @@ const VoiceCall: React.FC = () => {
           </button>
         </div>
       )}
+
+      {/* Transcript Display */}
+      {transcripts.length > 0 && (
+        <div className="transcript-container">
+          <h3 className="transcript-title">Conversation</h3>
+          <div className="transcript-messages">
+            {transcripts.map((transcript, index) => (
+              <div key={index} className={`transcript-message ${transcript.role}`}>
+                <div className="transcript-role">
+                  {transcript.role === 'assistant' ? '🤖 Agent' : '👤 User'}
+                </div>
+                <div className="transcript-text">{transcript.text}</div>
+                <div className="transcript-time">
+                  {transcript.timestamp.toLocaleTimeString()}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -179,10 +217,17 @@ const ChatWidget: React.FC = () => {
     });
 
     agentRef.current.on('message', (message: { text: string }) => {
-      // transcriptUpdate will be called by the SDK
+      console.log('🤖 Agent Message:', message.text);
     });
 
     agentRef.current.on('transcriptUpdate', (updatedTranscripts: Transcript[]) => {
+      if (updatedTranscripts.length > transcripts.length) {
+        const latestTranscript = updatedTranscripts[updatedTranscripts.length - 1];
+        if (latestTranscript && latestTranscript.isFinal) {
+          const label = latestTranscript.role === 'assistant' ? '🤖 Agent' : '👤 User';
+          console.log(`${label} Message:`, latestTranscript.text);
+        }
+      }
       setTranscripts([...updatedTranscripts]);
     });
 
